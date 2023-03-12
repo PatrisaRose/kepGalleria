@@ -9,13 +9,19 @@ let divVege = "</div>";
 function init() {
   kepMegjelenites();
   kepreKattintas();
+  gombraKattintas();
 }
 
 function kepMegjelenites() {
   let kep = "";
   let article = document.getElementById("galeria");
-  for (let akt = 0; index < kepek.length; index++) {
-    kep += divEleje + "<img src='" + kepek[index] + "' alt=''>" + divVege;
+  for (
+    let aktualisKepIndex = 0;
+    aktualisKepIndex < kepek.length;
+    aktualisKepIndex++
+  ) {
+    kep +=
+      divEleje + "<img src='" + kepek[aktualisKepIndex] + "' alt=''>" + divVege;
   }
   article.innerHTML = kep;
 }
@@ -24,7 +30,7 @@ function kepreKattintas() {
   const kisKepek = document.querySelectorAll("article div img");
   for (let index = 0; index < kisKepek.length; index++) {
     kisKepek[index].addEventListener("click", function () {
-      keprekatt(index);
+      keprekatt();
     });
   }
 }
@@ -37,13 +43,32 @@ function keprekatt() {
   nagykep[0].src = event.target.src;
 }
 
-function gombok() {
-  const bal = document.getElementsByClassName("bal");
-  const jobb = document.getElementsByClassName("jobb");
-  for (let index = 0; index < kisKepek.length; index++) {
-    bal.addEventListener("click", bal());
-    jobb.addEventListener("click", jobb());
-  }
+function gombraKattintas() {
+  const bal = document.querySelector(".bal");
+  const jobb = document.querySelector(".jobb");
+
+  bal.addEventListener("click", function () {
+    balGomb();
+  });
+  jobb.addEventListener("click", function () {
+    jobbGomb();
+  });
 }
 
-function bal() {}
+function balGomb() {
+  aktualisKepIndex--;
+  if (aktualisKepIndex < 0) {
+    aktualisKepIndex = kepek.length - 1;
+  }
+  const nagykep = document.querySelector("section div img");
+  nagykep.src = kepek[aktualisKepIndex];
+}
+
+function jobbGomb() {
+  aktualisKepIndex++;
+  if (aktualisKepIndex > kepek.length - 1) {
+    aktualisKepIndex = 0;
+  }
+  const nagykep = document.querySelector("section div img");
+  nagykep.src = kepek[aktualisKepIndex];
+}

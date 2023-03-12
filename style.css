@@ -25,6 +25,7 @@ section {
   justify-content: center;
 }
 
-img {
-  width: 100%;
+section img {
+  width: 750px;
+  height: auto;
 }
